@@ -17,12 +17,12 @@
 # how to make it parametrized for direct CLI usage.
 
 TARGETDIR=$(pwd)                        	# Set directory to clean up. Default is current working directory.
-REFDATE=$(stat -c %Y ~/foo | cut -f1 -d" ")	# Set file you want to use as reference date provider. 
+REFDATE=$(stat -c %Y ~/foo)	# Set file you want to use as reference date provider. 
 let "EXPIRE=60*60*24*3"				# Set expiration time (seconds*minutes*hours*days). The default equals 259200 seconds, ie three days.
 
 cd $TARGETDIR
 find . -mindepth 1 -maxdepth 1 -type d -print0 | while read -r -d '' dir; do 
-	DIRMTIME=$(stat -c %Y $dir | cut -f1 -d" ")
+	DIRMTIME=$(stat -c %Y $dir)
 	let "DIRAGE=$REFDATE-$DIRMTIME"
 	if [[ $DIRAGE -gt $EXPIRE ]]; then 
 		echo rm -rf $dir
