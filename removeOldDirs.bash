@@ -17,7 +17,8 @@
 # how to make it parametrized for direct CLI usage.
 
 TARGETDIR=$(pwd)                        	# Set directory to clean up. Default is current working directory.
-REFDATE=$(stat -c %Y ~/foo)	# Set file you want to use as reference date provider. 
+REFFILE=foo					# Set file you want to use as reference date provider. 
+REFDATE=$(stat -c %Y $REFFILE)			# Get UNIX time stamp for reference file.
 let "EXPIRE=60*60*24*3"				# Set expiration time (seconds*minutes*hours*days). The default equals 259200 seconds, ie three days.
 
 cd $TARGETDIR
