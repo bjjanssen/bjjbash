@@ -10,7 +10,7 @@
 # -not -newer options are not cutting it. 
 #
 # In this simple script you set a reference date in seconds since UNIX time began 
-# and compare your delete candidates time stamp in seconds since UNIX time began
+# and compare your delete candidates' time stamp in seconds since UNIX time began
 # against an expiration date. 
 #
 # It should be obvious how to modify this script for use on files or 
