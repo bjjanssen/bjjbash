@@ -16,6 +16,8 @@
 # It should be obvious how to modify this script for use on files or 
 # how to make it parametrized for direct CLI usage.
 
+logger "$(date +F%)--$(date +%T): Cleanup startet."
+
 TARGETDIR=$(pwd)                        	# Set directory to clean up. Default is current working directory.
 REFFILE=foo					# Set file you want to use as reference date provider. 
 REFDATE=$(stat -c %Y $REFFILE)			# Get UNIX time stamp for reference file.
@@ -26,6 +28,9 @@ find . -mindepth 1 -maxdepth 1 -type d -print0 | while read -r -d '' dir; do
 	DIRMTIME=$(stat -c %Y $dir)
 	let "DIRAGE=$REFDATE-$DIRMTIME"
 	if [[ $DIRAGE -gt $EXPIRE ]]; then 
-		echo rm -rf $dir
+		rm -rf $dir
+		logger "Deleted $dir"
 	fi
 done
+
+logger "$(date +F%)--$(date +%T): Cleanup finished."
